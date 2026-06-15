@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* app/globals.css */
+@layer base {
+  body {
+    @apply bg-[#F4F4F5] text-neutral-900 font-sans; /* Background sedikit lebih abu-abu agar tidak silau */
+  }
+  h1, h2, h3 {
+    @apply font-bold text-neutral-950; /* Judul lebih tebal */
+  }
+  .card {
+    @apply bg-white border border-neutral-300 shadow-sm rounded-lg; /* Border lebih tegas */
+  }
+}
