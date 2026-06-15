@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  timescaledb:
+    image: timescale/timescaledb-ha:pg16
+    container_name: djka_db
+    environment:
+      - POSTGRES_PASSWORD=djka_rahasia
+      - POSTGRES_USER=djka_admin
+      - POSTGRES_DB=djka_monitoring
+    ports:
+      - "5434:5432"
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
+    restart: always
+
+  mqtt-broker:
+    image: eclipse-mosquitto:2
+    container_name: djka_mqtt
+    ports:
+      - "1883:1883"
+      - "9002:9001"
+    volumes:
+      - /mnt/data/iot-dev/mosquitto/config:/mosquitto/config
+      - /mnt/data/iot-dev/mosquitto/data:/mosquitto/data
+      - /mnt/data/iot-dev/mosquitto/log:/mosquitto/log
+    restart: always
+
+  redis:
+    image: redis:7
+    container_name: djka_redis
+    ports:
+      - "6378:6379"
+    restart: always
+
+volumes:
+  timescaledb_data:
