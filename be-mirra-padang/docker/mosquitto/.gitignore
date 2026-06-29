@@ -1,0 +1,7 @@
+config/pwfile
+
+data/*
+!data/.gitkeep
+
+log/*
+!log/.gitkeep
