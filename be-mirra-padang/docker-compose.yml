@@ -3,11 +3,11 @@ services:
     image: timescale/timescaledb-ha:pg16
     container_name: djka_db
     environment:
-      - POSTGRES_PASSWORD=djka_rahasia
-      - POSTGRES_USER=djka_admin
-      - POSTGRES_DB=djka_monitoring
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
     ports:
-      - "5434:5432"
+      - "${DB_PORT}:5432"
     volumes:
       - timescaledb_data:/var/lib/postgresql/data
     restart: always
@@ -16,7 +16,7 @@ services:
     image: eclipse-mosquitto:2
     container_name: djka_mqtt
     ports:
-      - "1883:1883"
+      - "${MQTT_PORT}:1883"
       - "9002:9001"
     volumes:
       - ./docker/mosquitto/config:/mosquitto/config
@@ -28,7 +28,7 @@ services:
     image: redis:7
     container_name: djka_redis
     ports:
-      - "6378:6379"
+      - "${REDIS_PORT}:6379"
     restart: always
 
 volumes:
